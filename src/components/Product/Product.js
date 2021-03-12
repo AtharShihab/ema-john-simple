@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import "./Product.css";
+import { Link } from "react-router-dom";
 
 const Product = (props) => {
   const { key, img, name, seller, price, stock, features } = props.product;
@@ -15,7 +16,9 @@ const Product = (props) => {
 
       {/* product */}
       <div className="productDetailArea">
-        <h4 className="productName">{name}</h4>
+        <h4 className="productName">
+          <Link to={"/product/" + key}>{name}</Link>
+        </h4>
         <div className="rowArea">
           <div className="columnHalf">
             <p>
@@ -25,13 +28,15 @@ const Product = (props) => {
             <p>
               <small>only {stock} left in stock - order soon</small>
             </p>
-            <button
-              className="mainBtn"
-              onClick={() => props.handleAddProduct(props.product)}
-            >
-              <FontAwesomeIcon icon={faShoppingCart} />
-              add to cart
-            </button>
+            {props.showAddToCart && (
+              <button
+                className="mainBtn"
+                onClick={() => props.handleAddProduct(props.product)}
+              >
+                <FontAwesomeIcon icon={faShoppingCart} />
+                add to cart
+              </button>
+            )}
           </div>
           <div className="columnHalf">
             <h4>
@@ -39,7 +44,7 @@ const Product = (props) => {
             </h4>
             <ul>
               {features.map((feature) => (
-                <li>
+                <li key={features.indexOf(feature)}>
                   {feature.description}: <b>{feature.value}</b>
                 </li>
               ))}

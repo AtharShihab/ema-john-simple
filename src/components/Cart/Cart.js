@@ -6,7 +6,7 @@ const Cart = (props) => {
   let price = 0;
   let shipping = 0;
   cartItems.forEach((item) => {
-    price += item.price;
+    price += item.price * item.quantity;
   });
   if (price > 200) {
     shipping = 0;
@@ -31,31 +31,36 @@ const Cart = (props) => {
       <p>Item Ordered: {cartItems.length}</p>
 
       <table>
-        <tr>
-          <td>items:</td>
-          <td>${formatNumber(price)}</td>
-        </tr>
-        <tr>
-          <td>Shipping & Handling:</td>
-          <td>${shipping}</td>
-        </tr>
-        <tr>
-          <td>Total before tax:</td>
-          <td>${formatNumber(total)}</td>
-        </tr>
-        <tr>
-          <td>Estimated Tax:</td>
-          <td>${formatNumber(tax)}</td>
-        </tr>
-        <tr>
-          <td>
-            <h4>Order Total:</h4>
-          </td>
-          <td>
-            <h4>${formatNumber(grandTotal)}</h4>
-          </td>
-        </tr>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>items:</td>
+            <td>${formatNumber(price)}</td>
+          </tr>
+          <tr>
+            <td>Shipping & Handling:</td>
+            <td>${shipping}</td>
+          </tr>
+          <tr>
+            <td>Total before tax:</td>
+            <td>${formatNumber(total)}</td>
+          </tr>
+          <tr>
+            <td>Estimated Tax:</td>
+            <td>${formatNumber(tax)}</td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Order Total:</h4>
+            </td>
+            <td>
+              <h4>${formatNumber(grandTotal)}</h4>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
       </table>
+      {props.children}
     </div>
   );
 };
