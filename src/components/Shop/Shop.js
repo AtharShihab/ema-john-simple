@@ -17,7 +17,7 @@ const Shop = () => {
   const [cart, setCart] = useState([]);
   useEffect(() => {
     setProduct(first10);
-  }, []);
+  }, [first10]);
 
   useEffect(() => {
     const savedCart = getDatabaseCart();
